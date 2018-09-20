@@ -44,6 +44,7 @@ private:
     int getPid();
     void connectTo(QString ip,quint16 port);
     QStringList decrypt(QByteArray msg);
+    int delay;
 
 };
 

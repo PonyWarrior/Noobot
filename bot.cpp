@@ -16,6 +16,7 @@ bot::bot(QObject *parent) : QObject(parent)
     character = 0;                  //id of the character we want to use
     keepAlive = new QTimer(this);   //Timer to send the pulse packet every 60 sec or we get disconnected
     runtime = 0;                    //minutes we are ingame
+    delay = 0;
     connect(socket,SIGNAL(connected()),this,SLOT(connected()));         //Calls the connected method when we establish a connection
     connect(socket,SIGNAL(disconnected()),this,SLOT(disconnected()));   //same for disconnecting
     connect(socket,SIGNAL(readyRead()),this,SLOT(recievedPacket()));    //and recieving a Packet from the Server
@@ -81,6 +82,23 @@ void bot::recievedPacket()
             if(packs[0]=="OK"){                                 //spawns your character in the world
                 send("game_start");
                 keepAlive->start(60000);
+            }
+            // mv 1 92040 25 26 12
+            if(packs[0]=="mv" && packs[2]=="92040")
+            {
+                if (delay == 0)
+                {
+                    send("walk "+packs[3]+" "+packs[4]+" 0 12");
+                    delay ++;
+                }
+                else if (delay > 5)
+                {
+                    delay = 0;
+                }
+                else
+                {
+                    delay++;
+                }
             }
         }
 
@@ -151,4 +169,5 @@ void bot::connectTo(QString ip, quint16 port)
     socket->connectToHost(ip,port);
     qDebug()<<"Connecting to Server!";
 }
+
 

@@ -8,9 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    NosCrypto::setClientXhash("0f587002f3568bbed4430ef9d49ebb9a");   //md5 of NostaleClientX.exe
-    NosCrypto::setClienthash("0f587002f3568bbed4430ef9d49ebb9a");   //md5 of NostaleClient.exe
-    NosCrypto::setVersion("0.9.3.3");                        //Version of NostaleClient.exe
+    NosCrypto::setClientXhash("3d45ed2f6085a8ed0aa8c3edd9518e85");   //md5 of NostaleClientX.exe
+    NosCrypto::setClienthash("3d45ed2f6085a8ed0aa8c3edd9518e85");   //md5 of NostaleClient.exe
+    NosCrypto::setVersion("0.9.5.38");                        //Version of NostaleClient.exe
 
     bot1 = new bot();
 
@@ -41,6 +41,11 @@ void MainWindow::on_login_btn_clicked()
 void MainWindow::showMsg(QString msg)
 {
     ui->packetlogger->append(msg);
+}
+
+void MainWindow::walk()
+{
+
 }
 
 void MainWindow::on_send_packet_btn_clicked()

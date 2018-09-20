@@ -46,6 +46,19 @@
            <property name="sizeConstraint">
             <enum>QLayout::SetMinimumSize</enum>
            </property>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Login Server IP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="login_password"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLineEdit" name="login_username"/>
+           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label">
              <property name="text">
@@ -60,16 +73,24 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLineEdit" name="login_username"/>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="login_password"/>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_3">
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_5">
              <property name="text">
-              <string>Login Server IP</string>
+              <string>Game Server IP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="login_server_port">
+             <property name="text">
+              <string>4000</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLineEdit" name="login_server_ip">
+             <property name="text">
+              <string>46.105.115.121</string>
              </property>
             </widget>
            </item>
@@ -80,24 +101,31 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QLineEdit" name="login_server_ip">
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_7">
              <property name="text">
-              <string>79.110.84.75</string>
+              <string>Char Slot</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="login_server_port">
+           <item row="5" column="0">
+            <widget class="QLineEdit" name="game_server_ip">
              <property name="text">
-              <string>4001</string>
+              <string>46.105.115.121</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_5">
+           <item row="7" column="1">
+            <widget class="QPushButton" name="login_btn">
              <property name="text">
-              <string>Game Server IP</string>
+              <string>Login</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLineEdit" name="game_server_port">
+             <property name="text">
+              <string>4110</string>
              </property>
             </widget>
            </item>
@@ -105,19 +133,6 @@
             <widget class="QLabel" name="label_6">
              <property name="text">
               <string>Game Server Port</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QLineEdit" name="game_server_ip"/>
-           </item>
-           <item row="5" column="1">
-            <widget class="QLineEdit" name="game_server_port"/>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Char Slot</string>
              </property>
             </widget>
            </item>
@@ -138,13 +153,6 @@
                <string>2</string>
               </property>
              </item>
-            </widget>
-           </item>
-           <item row="7" column="1">
-            <widget class="QPushButton" name="login_btn">
-             <property name="text">
-              <string>Login</string>
-             </property>
             </widget>
            </item>
           </layout>
@@ -171,6 +179,13 @@
            <item row="0" column="0" colspan="2">
             <widget class="QLineEdit" name="send_packet"/>
            </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="send_packet_btn">
+             <property name="text">
+              <string>Send</string>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="0">
             <spacer name="horizontalSpacer">
              <property name="orientation">
@@ -183,13 +198,6 @@
               </size>
              </property>
             </spacer>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="send_packet_btn">
-             <property name="text">
-              <string>Send</string>
-             </property>
-            </widget>
            </item>
           </layout>
          </widget>
@@ -229,7 +237,7 @@
      <x>0</x>
      <y>0</y>
      <width>789</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

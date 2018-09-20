@@ -19,7 +19,7 @@ public:
 private slots:
     void on_login_btn_clicked();
     void showMsg(QString msg);
-
+    void walk();
     void on_send_packet_btn_clicked();
 
 private:
