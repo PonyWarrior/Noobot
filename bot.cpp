@@ -15,7 +15,7 @@ bot::bot(QObject *parent) : QObject(parent)
     password = "";
     character = 0;                  //id of the character we want to use
     keepAlive = new QTimer(this);   //Timer to send the pulse packet every 60 sec or we get disconnected
-    QTimer *timer = new QTimer(this);
+    timer = new QTimer(this);
     runtime = 0;                   //minutes we are ingame
     master = 92040;                 //your Id here
     masterX = 0;
