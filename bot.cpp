@@ -15,8 +15,15 @@ bot::bot(QObject *parent) : QObject(parent)
     password = "";
     character = 0;                  //id of the character we want to use
     keepAlive = new QTimer(this);   //Timer to send the pulse packet every 60 sec or we get disconnected
-    runtime = 0;                    //minutes we are ingame
-    delay = 0;
+    QTimer *timer = new QTimer(this);
+    runtime = 0;                   //minutes we are ingame
+    master = 92040;                 //your Id here
+    masterX = 0;
+    masterY = 0;
+    slaveX = 0;
+    slaveY = 0;
+    xDiff = 0;
+    yDiff = 0;
     connect(socket,SIGNAL(connected()),this,SLOT(connected()));         //Calls the connected method when we establish a connection
     connect(socket,SIGNAL(disconnected()),this,SLOT(disconnected()));   //same for disconnecting
     connect(socket,SIGNAL(readyRead()),this,SLOT(recievedPacket()));    //and recieving a Packet from the Server
@@ -84,26 +91,52 @@ void bot::recievedPacket()
                 keepAlive->start(60000);
             }
             // mv 1 92040 25 26 12
-            if(packs[0]=="mv" && packs[2]=="92040")
-            {
-                if (delay == 0)
-                {
-                    send("walk "+packs[3]+" "+packs[4]+" 0 12");
-                    delay ++;
-                }
-                else if (delay > 5)
-                {
-                    delay = 0;
-                }
-                else
-                {
-                    delay++;
+            // at 92040 2560 2 23 5 0 53 1 -1
+            // send("walk "+packs[3]+" "+packs[4]+" 0 12");
+            if(packs[0]=="at"){
+                slaveX = packs[5].toInt();
+                slaveY = packs[4].toInt();
+            }
+            if(packs[0]=="mv" && packs[2]=="92040"){
+                masterX = packs[3].toInt();
+                masterY = packs[4].toInt();
+                masterX > slaveX ? xDiff = masterX - slaveX : xDiff = slaveX - masterX;
+                masterY > slaveY ? yDiff = masterY - slaveY : yDiff = slaveY - masterY;
+                if(xDiff > 2 || yDiff > 2){
+                    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+                    timer->start(500);
+
+                    }
                 }
             }
         }
 
     }
+
+void bot::update()
+{
+    if(masterX > slaveX){
+        slaveX += 2;
+        xDiff < 2 ? xDiff = 0 : xDiff -= 2;
+    }
+    else{
+        slaveX < 2 ? slaveX = 0 : slaveX -= 2;
+        xDiff < 2 ? xDiff = 0 : xDiff -= 2;
+    }
+    if(masterY > slaveY){
+        slaveY += 2;
+        yDiff < 2 ? yDiff = 0 : yDiff -= 2;
+    }
+    else{
+        slaveY < 2 ? slaveY = 0 : slaveY -= 2;
+        yDiff < 2 ? yDiff = 0 : yDiff -= 2;
+    }
+    send("walk "+QString::number(slaveX)+" "+QString::number(slaveY)+" 0 12");
+    if(xDiff == 0 && yDiff == 0){
+        timer->stop();
+    }
 }
+
 
 void bot::disconnected()
 {

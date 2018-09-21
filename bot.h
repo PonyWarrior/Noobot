@@ -25,6 +25,7 @@ private slots:
     void disconnected();
     void loginHelper();
     void sendPulsePacket();
+    void update();
 
 private:
     QTcpSocket *socket;
@@ -39,12 +40,20 @@ private:
     int pid;
     int character;
     QTimer *keepAlive;
+    QTimer *timer;
     int runtime;
     bool loggedin;
     int getPid();
     void connectTo(QString ip,quint16 port);
     QStringList decrypt(QByteArray msg);
     int delay;
+    int master;
+    int masterX;
+    int masterY;
+    int slaveX;
+    int slaveY;
+    int xDiff;
+    int yDiff;
 
 };
 
